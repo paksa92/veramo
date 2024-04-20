@@ -10,7 +10,7 @@ import {
   PrimaryColumn,
   Relation,
 } from 'typeorm'
-import { IMessage } from '@veramo/core-types'
+import { IMessage, IMessageAttachment } from '@veramo/core-types'
 import { Identifier } from './identifier.js'
 import { createPresentationEntity, Presentation } from './presentation.js'
 import { createCredentialEntity, Credential } from './credential.js'
@@ -118,6 +118,9 @@ export class Message extends BaseEntity {
   to?: Relation<Identifier>
 
   @Column('simple-json', { nullable: true })
+  attachments?: IMessageAttachment[] | null
+
+  @Column('simple-json', { nullable: true })
   metaData?: MetaData[] | null
 
   @ManyToMany((type) => Presentation, (presentation) => presentation.messages, {
@@ -140,6 +143,7 @@ export const createMessageEntity = (args: IMessage): Message => {
   message.type = args.type
   message.raw = args.raw
   message.data = args.data
+  message.attachments = args.attachments
   message.metaData = args.metaData
 
   if (args.replyTo) {
@@ -223,6 +227,10 @@ export const createMessage = (args: Message): IMessage => {
 
   if (args.credentials) {
     message.credentials = args.credentials.map((vc) => vc.raw)
+  }
+
+  if (args.attachments) {
+    message.attachments = args.attachments
   }
 
   return message as IMessage
