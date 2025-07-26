@@ -8,17 +8,13 @@ export class AddAttachments1753543810823 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         debug(`Running migration 'AddAttachments1753543810823'`)
 
-        const table = migrationGetExistingTableByName(queryRunner, 'message')
-        table.addColumn(
-            new TableColumn({
-                name: "attachments",
-                type: "text",
-                isNullable: true,
-            })
-        )
-        debug(`adding 'attachments' column to '${table.name}' table`)
-        await queryRunner.addColumn(table, table.columns[table.columns.length - 1])
-        debug(`added 'attachments' column to '${table.name}' table`)
+        debug(`adding 'attachments' column to 'message' table`)
+        await queryRunner.addColumn(migrationGetExistingTableByName(queryRunner, 'message', true), new TableColumn({
+            name: "attachments",
+            type: "text",
+            isNullable: true,
+        }))
+        debug(`added 'attachments' column to 'message' table`)
 
         debug(`Migration 'AddAttachments1753543810823' completed successfully`)
     }
@@ -26,10 +22,9 @@ export class AddAttachments1753543810823 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         debug(`Rolling back migration 'AddAttachments1753543810823'`)
 
-        const table = migrationGetExistingTableByName(queryRunner, 'message')
-        debug(`removing 'attachments' column from '${table.name}' table`)
-        await queryRunner.dropColumn(table, 'attachments')
-        debug(`removed 'attachments' column from '${table.name}' table`)
+        debug(`removing 'attachments' column from 'message' table`)
+        await queryRunner.dropColumn(migrationGetExistingTableByName(queryRunner, 'message', true), 'attachments')
+        debug(`removed 'attachments' column from 'message' table`)
 
         debug(`Migration 'AddAttachments1753543810823' rolled back successfully`)
     }

@@ -8,17 +8,13 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         debug(`Running migration 'AddParentThreadId1753542709712'`)
 
-        const table = migrationGetExistingTableByName(queryRunner, 'message')
-        table.addColumn(
-            new TableColumn({
-                name: 'parentThreadId',
-                type: 'varchar',
-                isNullable: true,
-            }),
-        );
-        debug(`adding 'parentThreadId' column to '${table.name}' table`)
-        await queryRunner.addColumn(table, table.columns[table.columns.length - 1])
-        debug(`added 'parentThreadId' column to '${table.name}' table`)
+        debug(`adding 'parentThreadId' column to 'message' table`)
+        await queryRunner.addColumn(migrationGetExistingTableByName(queryRunner, 'message', true), new TableColumn({
+            name: 'parentThreadId',
+            type: 'varchar',
+            isNullable: true,
+        }))
+        debug(`added 'parentThreadId' column to 'message' table`)
 
         debug(`Migration 'AddParentThreadId1753542709712' completed successfully`)
     }
@@ -26,10 +22,9 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         debug(`Rolling back migration 'AddParentThreadId1753542709712'`)
 
-        const table = migrationGetExistingTableByName(queryRunner, 'message')
-        debug(`removing 'parentThreadId' column from '${table.name}' table`)
-        await queryRunner.dropColumn(table, 'parentThreadId')
-        debug(`removed 'parentThreadId' column from '${table.name}' table`)
+        debug(`removing 'parentThreadId' column from 'message' table`)
+        await queryRunner.dropColumn(migrationGetExistingTableByName(queryRunner, 'message'), 'parentThreadId')
+        debug(`removed 'parentThreadId' column from 'message' table`)
 
         debug(`Migration 'AddParentThreadId1753542709712' rolled back successfully`)
     }
