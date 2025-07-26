@@ -15,7 +15,7 @@ export class AddAttachments1753543810823 implements MigrationInterface {
 
         if (!hasColumn) {
             debug(`adding 'attachments' column to 'message' table`)
-            await queryRunner.addColumn(table, new TableColumn({
+            await queryRunner.addColumn('message', new TableColumn({
                 name: "attachments",
                 type: "text",
                 isNullable: true,
@@ -34,7 +34,7 @@ export class AddAttachments1753543810823 implements MigrationInterface {
 
         if (hasColumn) {
             debug(`removing 'attachments' column from 'message' table`)
-            await queryRunner.dropColumn(migrationGetExistingTableByName(queryRunner, 'message'), 'attachments')
+            await queryRunner.dropColumn('message', 'attachments')
             debug(`removed 'attachments' column from 'message' table`)
         }
 

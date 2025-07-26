@@ -15,7 +15,7 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
 
         if (!hasColumn) {
             debug(`adding 'parentThreadId' column to 'message' table`)
-            await queryRunner.addColumn(table, new TableColumn({
+            await queryRunner.addColumn('message', new TableColumn({
                 name: 'parentThreadId',
                 type: 'varchar',
                 isNullable: true,
@@ -34,7 +34,7 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
 
         if (hasColumn) {
             debug(`removing 'parentThreadId' column from 'message' table`)
-            await queryRunner.dropColumn(table, 'parentThreadId')
+            await queryRunner.dropColumn('table', 'parentThreadId')
             debug(`removed 'parentThreadId' column from 'message' table`)
         }
 
