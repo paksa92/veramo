@@ -19,7 +19,7 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
         }
 
         debug(`adding 'parentThreadId' column to 'message' table`)
-        await queryRunner.addColumn(migrationGetExistingTableByName(queryRunner, 'message', true), new TableColumn({
+        await queryRunner.addColumn(migrationGetExistingTableByName(queryRunner, 'message'), new TableColumn({
             name: 'parentThreadId',
             type: 'varchar',
             isNullable: true,

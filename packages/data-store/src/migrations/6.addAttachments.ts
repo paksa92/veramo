@@ -19,7 +19,7 @@ export class AddAttachments1753543810823 implements MigrationInterface {
         }
 
         debug(`adding 'attachments' column to 'message' table`)
-        await queryRunner.addColumn(migrationGetExistingTableByName(queryRunner, 'message', true), new TableColumn({
+        await queryRunner.addColumn(migrationGetExistingTableByName(queryRunner, 'message'), new TableColumn({
             name: "attachments",
             type: "text",
             isNullable: true,
@@ -50,7 +50,7 @@ export class AddAttachments1753543810823 implements MigrationInterface {
 
 
         debug(`removing 'attachments' column from 'message' table`)
-        await queryRunner.dropColumn(migrationGetExistingTableByName(queryRunner, 'message', true), 'attachments')
+        await queryRunner.dropColumn(migrationGetExistingTableByName(queryRunner, 'message'), 'attachments')
         debug(`removed 'attachments' column from 'message' table`)
 
         if (queryRunner.connection.driver.options.type === 'sqlite') {
