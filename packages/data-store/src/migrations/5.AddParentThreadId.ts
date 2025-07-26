@@ -16,9 +16,6 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
                 isNullable: true,
             }),
         );
-        debug(`adding 'parentThreadId' column to '${table.name}' table`)
-        await queryRunner.addColumn(table, table.columns[table.columns.length - 1])
-        debug(`added 'parentThreadId' column to '${table.name}' table`)
         table.addColumn(
             new TableColumn({
                 name: "attachments",
@@ -26,6 +23,9 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
                 isNullable: true,
             })
         )
+        debug(`adding 'parentThreadId' column to '${table.name}' table`)
+        await queryRunner.addColumn(table, table.columns[table.columns.length - 2])
+        debug(`added 'parentThreadId' column to '${table.name}' table`)
         debug(`adding 'attachments' column to '${table.name}' table`)
         await queryRunner.addColumn(table, table.columns[table.columns.length - 1])
         debug(`added 'attachments' column to '${table.name}' table`)
