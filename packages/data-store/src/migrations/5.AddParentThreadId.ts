@@ -10,18 +10,13 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         debug(`Running migration 'AddParentThreadId1753542709712'`)
 
-        const table = migrationGetExistingTableByName(queryRunner, 'message');
-        const hasColumn = table?.findColumnByName('parentThreadId');
-
-        if (!hasColumn) {
-            debug(`adding 'parentThreadId' column to 'message' table`)
-            await queryRunner.addColumn('message', new TableColumn({
-                name: 'parentThreadId',
-                type: 'varchar',
-                isNullable: true,
-            }))
-            debug(`added 'parentThreadId' column to 'message' table`)
-        }
+        debug(`adding 'parentThreadId' column to 'message' table`)
+        await queryRunner.addColumn('message', new TableColumn({
+            name: 'parentThreadId',
+            type: 'varchar',
+            isNullable: true,
+        }))
+        debug(`added 'parentThreadId' column to 'message' table`)
 
         debug(`Migration 'AddParentThreadId1753542709712' completed successfully`)
     }
@@ -29,14 +24,9 @@ export class AddParentThreadId1753542709712 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         debug(`Rolling back migration 'AddParentThreadId1753542709712'`)
 
-        const table = migrationGetExistingTableByName(queryRunner, 'message');
-        const hasColumn = table?.findColumnByName('parentThreadId');
-
-        if (hasColumn) {
-            debug(`removing 'parentThreadId' column from 'message' table`)
-            await queryRunner.dropColumn('table', 'parentThreadId')
-            debug(`removed 'parentThreadId' column from 'message' table`)
-        }
+        debug(`removing 'parentThreadId' column from 'message' table`)
+        await queryRunner.dropColumn('table', 'parentThreadId')
+        debug(`removed 'parentThreadId' column from 'message' table`)
 
         debug(`Migration 'AddParentThreadId1753542709712' rolled back successfully`)
     }
