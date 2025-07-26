@@ -4,6 +4,7 @@ import { SimplifyRelations1447159020002 } from './2.simplifyRelations.js'
 import { CreatePrivateKeyStorage1629293428674 } from './3.createPrivateKeyStorage.js'
 import { AllowNullIssuanceDateForPresentations1637237492913 } from './4.allowNullVPIssuanceDate.js'
 import { AddParentThreadId1753542709712 } from './5.addParentThreadId.js'
+import { AddAttachments1753543810823 } from './6.addAttachments.js'
 
 /**
  * Allow others to use shared migration functions if they extend Veramo
@@ -25,6 +26,7 @@ export const migrations = [
   CreatePrivateKeyStorage1629293428674,
   AllowNullIssuanceDateForPresentations1637237492913,
   AddParentThreadId1753542709712,
+  AddAttachments1753543810823,
 ]
 
 /**
