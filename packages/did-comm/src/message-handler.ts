@@ -28,7 +28,7 @@ export class DIDCommMessageHandler extends AbstractMessageHandler {
               const key = identifier.keys.find((k) => k.type === 'Ed25519')
               if (!key) throw Error('No encryption keys')
               decrypted = await context.agent.keyManagerDecryptJWE({ kid: key.kid, data: message.raw })
-            } catch (e) {}
+            } catch (e) { }
             if (decrypted) {
               debug('Decrypted for %s', identifier.did)
               debug('Message:', decrypted)
@@ -105,6 +105,7 @@ export class DIDCommMessageHandler extends AbstractMessageHandler {
             from,
             id,
             thid: threadId,
+            pthid: parentThreadId,
             created_time: createdAt,
             expires_time: expiresAt,
             body: data,
@@ -117,6 +118,7 @@ export class DIDCommMessageHandler extends AbstractMessageHandler {
           message.from = from
           message.id = id
           message.threadId = threadId
+          message.parentThreadId = parentThreadId
           message.createdAt = createdAt
           message.expiresAt = expiresAt
           message.data = data

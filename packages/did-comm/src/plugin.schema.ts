@@ -283,9 +283,13 @@ export const schema = {
               "type": "string",
               "description": "Optional. Expiration date (ISO 8601)"
             },
-            "threadId": {
+            "threadid": {
               "type": "string",
-              "description": "Optional. Thread ID"
+              "description": "optional. thread id"
+            },
+            "parentThreadid": {
+              "type": "string",
+              "description": "optional. parent thread id"
             },
             "raw": {
               "type": "string",

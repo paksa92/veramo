@@ -24,16 +24,16 @@ export interface Where<TColumns> {
   value?: string[]
   not?: boolean
   op?:
-    | 'LessThan'
-    | 'LessThanOrEqual'
-    | 'MoreThan'
-    | 'MoreThanOrEqual'
-    | 'Equal'
-    | 'Like'
-    | 'Between'
-    | 'In'
-    | 'Any'
-    | 'IsNull'
+  | 'LessThan'
+  | 'LessThanOrEqual'
+  | 'MoreThan'
+  | 'MoreThanOrEqual'
+  | 'Equal'
+  | 'Like'
+  | 'Between'
+  | 'In'
+  | 'Any'
+  | 'IsNull'
 }
 
 /**
@@ -85,6 +85,7 @@ export type TMessageColumns =
   | 'createdAt'
   | 'expiresAt'
   | 'threadId'
+  | 'parentThreadId'
   | 'type'
   | 'raw'
   | 'replyTo'

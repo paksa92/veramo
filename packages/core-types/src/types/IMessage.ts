@@ -76,6 +76,11 @@ export interface IMessage {
   threadId?: string
 
   /**
+   * Optional. Parent thread ID
+   */
+  parentThreadId?: string
+
+  /**
    * Optional. Original message raw data
    */
   raw?: string

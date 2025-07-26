@@ -32,6 +32,8 @@ export class Message implements IMessage {
 
   threadId?: string
 
+  parentThreadId?: string;
+
   // @ts-ignore
   type: string
 

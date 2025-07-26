@@ -10,7 +10,7 @@ import {
   PrimaryColumn,
   Relation,
 } from 'typeorm'
-import { IMessage } from '@veramo/core-types'
+import { IMessage, IMessageAttachment } from '@veramo/core-types'
 import { Identifier } from './identifier.js'
 import { createPresentationEntity, Presentation } from './presentation.js'
 import { createCredentialEntity, Credential } from './credential.js'
@@ -83,6 +83,9 @@ export class Message extends BaseEntity {
   @Column({ nullable: true })
   threadId?: string
 
+  @Column({ nullable: true })
+  parentThreadId?: string
+
   @Column()
   // @ts-ignore
   type: string
@@ -120,6 +123,9 @@ export class Message extends BaseEntity {
   @Column('simple-json', { nullable: true })
   metaData?: MetaData[] | null
 
+  @Column('simple-json', { nullable: true })
+  attachments?: IMessageAttachment[] | null
+
   @ManyToMany((type) => Presentation, (presentation) => presentation.messages, {
     cascade: true,
   })
@@ -137,6 +143,7 @@ export const createMessageEntity = (args: IMessage): Message => {
   const message = new Message()
   message.id = args.id
   message.threadId = args.threadId
+  message.parentThreadId = args.parentThreadId
   message.type = args.type
   message.raw = args.raw
   message.data = args.data
@@ -177,6 +184,10 @@ export const createMessageEntity = (args: IMessage): Message => {
     message.credentials = args.credentials.map(createCredentialEntity)
   }
 
+  if (args.attachments) {
+    message.attachments = args.attachments;
+  }
+
   return message
 }
 
@@ -191,6 +202,10 @@ export const createMessage = (args: Message): IMessage => {
 
   if (args.threadId) {
     message.threadId = args.threadId
+  }
+
+  if (args.parentThreadId) {
+    message.parentThreadId = args.parentThreadId
   }
 
   if (args.replyTo) {
@@ -223,6 +238,10 @@ export const createMessage = (args: Message): IMessage => {
 
   if (args.credentials) {
     message.credentials = args.credentials.map((vc) => vc.raw)
+  }
+
+  if (args.attachments) {
+    message.attachments = args.attachments
   }
 
   return message as IMessage

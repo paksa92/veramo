@@ -2139,6 +2139,10 @@ export const schema = {
               "type": "string",
               "description": "Optional. Thread ID"
             },
+            "parentThreadId": {
+              "type": "string",
+              "description": "Optional. Parent thread ID"
+            },
             "raw": {
               "type": "string",
               "description": "Optional. Original message raw data"
@@ -2963,6 +2967,7 @@ export const schema = {
             "createdAt",
             "expiresAt",
             "threadId",
+            "parentThreadId",
             "type",
             "raw",
             "replyTo",
@@ -3012,6 +3017,10 @@ export const schema = {
             "threadId": {
               "type": "string",
               "description": "Optional. Thread ID"
+            },
+            "parentThreadId": {
+              "type": "string",
+              "description": "Optional. Parent thread ID"
             },
             "raw": {
               "type": "string",
@@ -3878,6 +3887,10 @@ export const schema = {
             "threadId": {
               "type": "string",
               "description": "Optional. Thread ID"
+            },
+            "parentThreadId": {
+              "type": "string",
+              "description": "Optional. Parent thread ID"
             },
             "raw": {
               "type": "string",
