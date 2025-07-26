@@ -7,7 +7,8 @@
   "exports": "./build/index.js",
   "scripts": {
     "build": "tsc",
-    "extract-api": "node ../cli/bin/veramo.js dev extract-api"
+    "extract-api": "node ../cli/bin/veramo.js dev extract-api",
+    "pack-package": "pnpm pack"
   },
   "dependencies": {
     "@noble/curves": "^1.4.2",
