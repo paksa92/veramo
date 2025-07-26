@@ -2,7 +2,7 @@ import Debug from 'debug'
 import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm'
 import { migrationGetExistingTableByName } from './migration-functions'
 
-const debug = Debug('veramo:data-store:migrate-presentation-issuance-date')
+const debug = Debug('veramo:data-store:migrate-parent-thread-id')
 
 export class AddParentThreadId1753542709712 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
